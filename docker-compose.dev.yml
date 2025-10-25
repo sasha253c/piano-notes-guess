@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  piano-notes-guess-dev:
+    build: .
+    container_name: piano-notes-guess-dev
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: unless-stopped
+    networks:
+      - piano-network
+
+networks:
+  piano-network:
+    driver: bridge
