@@ -110,7 +110,7 @@ function drawNoteOnStaff(midi) {
   const needsAcc = key.includes('#');
   const note = new VF.StaveNote({ keys: [key], duration: 'q', clef });
 
-  if (needsAcc) note.addAccidental(0, new VF.Accidental('#'));
+  if (needsAcc) note.addModifier(new VF.Accidental('#'));
 
   // Voice + formatter
   const voice = new VF.Voice({num_beats: 1, beat_value: 4});
