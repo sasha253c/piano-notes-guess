@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Piano Notes Guess — Web MIDI Trainer</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Piano Notes Guess</h1>
+    <p>Connect your digital piano via MIDI. Play the note you see on the staff — get it right to advance!</p>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <section class="card">
+        <div class="controls" id="controls">
+          <div>
+            <label for="midiInput">MIDI Input</label>
+            <select id="midiInput" aria-label="MIDI Input"></select>
+          </div>
+          <div>
+            <label>Clefs to practice</label>
+            <div>
+              <label><input type="checkbox" id="clefTreble" checked /> Treble</label>
+              &nbsp;&nbsp;
+              <label><input type="checkbox" id="clefBass" checked /> Bass</label>
+            </div>
+          </div>
+          <div>
+            <label>Accidentals</label>
+            <div>
+              <label><input type="checkbox" id="accidentals" /> Include sharps ♯</label>
+            </div>
+          </div>
+          <div>
+            <label for="difficulty">Range</label>
+            <select id="difficulty">
+              <option value="beginner">Beginner: C4–C5</option>
+              <option value="treble" selected>Treble: C4–B5</option>
+              <option value="bass">Bass: C2–B3</option>
+              <option value="wide">Wide: C2–C6</option>
+            </select>
+          </div>
+          <div>
+            <label>&nbsp;</label>
+            <button id="connectBtn" class="primary">Connect MIDI</button>
+          </div>
+          <div>
+            <label>&nbsp;</label>
+            <button id="newNoteBtn">New Note</button>
+          </div>
+        </div>
+
+        <div class="status">
+          <div class="pill">Target: <strong id="targetName">—</strong> <span id="targetClef"></span></div>
+          <div class="pill">Last played: <strong id="playedName">—</strong></div>
+        </div>
+
+        <div class="staff-wrap">
+          <div id="staffCanvas"></div>
+          <div id="noVexMsg" class="hidden" aria-live="polite">VexFlow not loaded — showing text-only mode.</div>
+        </div>
+
+        <div id="message" class="message" aria-live="polite"></div>
+      </section>
+
+      <aside class="card">
+        <h3 style="margin-top:0">How it works</h3>
+        <ol>
+          <li>Click <span class="kbd">Connect MIDI</span> and pick your keyboard.</li>
+          <li>We show a random note on the selected clef(s).</li>
+          <li>Play the matching note on your keyboard. If correct — we show the next note.</li>
+        </ol>
+        <p><strong>Tips</strong></p>
+        <ul>
+          <li>Middle C is <span class="kbd">C4</span> (MIDI 60).</li>
+          <li>Works on <span class="kbd">https://</span> or <span class="kbd">http://localhost</span>.</li>
+        </ul>
+        <div class="pill" style="margin-top:8px">Score: <strong id="score">0</strong></div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="footer">Built with Web MIDI. Staff rendering by VexFlow (optional).</div>
+
+  <!-- Try to load VexFlow (global build). If it fails, app continues in text-only mode. -->
+  <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script>
+  <script src="/script.js"></script>
+</body>
+</html>
+
